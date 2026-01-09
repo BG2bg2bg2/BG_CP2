@@ -17,9 +17,10 @@
     # how often are you saving?
         # 1 weekly
         # 2 monthly
-        # enter how much are you contributing?
+        # enter how much are you contributing? (con)d
+if = if:
         # if save is 1
-            #display 
+            #display (con )
 
 #enter a number
 #1 for an item that you want and how much it will cost
