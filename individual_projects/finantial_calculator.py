@@ -27,11 +27,11 @@
 #2 for how much you are paying for housing
 #3 for if you have a car and how much gas cost you
 #4 for what you want and how much grocries will cost you
-#5 for if you get tips and how much each day you have gotten
+#5 for if you get ti>ps and how much each day you have gotten
 #6 for whatever you might have missed 
 
 
-#How long it will take to save for a goal based on a weekly or monthly deposit
+#How long it will take to save for a goal based on a weekly or monthly de>posit
 
 #Compound Interest Calculator
 
