@@ -66,7 +66,14 @@ def comp_int():
 def budget():
     income = float(input("Enter mounthly income: $"))
     saving = int(input("enter what percent are you saving: $"))
-    food = int(input("enter what percent are you spending for your food: $"))
+    food = int(input(
+    return
+# how often are you saving?
+
+main()            save_goal()
+        elif to_calc == "":
+            comp_int()
+          "enter what percent are you spending for your food: $"))
     entertainment = int(input("enter what percent are you spending for entertainment: $"))
     other = int(input("enter what percent are other things you might spend on: $"))
     print(f"Savings: ${income * savings:.2f}")
@@ -83,4 +90,4 @@ def tip():
     return
 # how often are you saving?
 
-main()            
+main() 
