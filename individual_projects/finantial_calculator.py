@@ -5,7 +5,7 @@
 #enter what your job is and how much you are getting payed per month/weekly
 
 #starting menu (menu)
-def menu():
+def main():
 # enter a number to select an optoin
     while True:
         print("1 = Savings Goal")
@@ -15,33 +15,33 @@ def menu():
         print("5 = Tip")
         print("6 = Exit")# 1 saving time calculif = if:ator ()
         to_calc = input("Enter a number 1-6 to do calculations on that option")
-        if to_calc == "":
-            savings_goal()
-        elif to_calc == "":
+        if to_calc == "1":
+            save_goal()
+        elif to_calc == "2":
             comp_int()
-        elif to_calc == "":# 1 saving time calculator = if: you want to save up to a surtain amount of money ()
-            bud_allo
-        elif to_calc == "":
+        elif to_calc == "3": 
+            budget()
+        elif to_calc == "4":
             sale()
-        elif to_calc == "":
+        elif to_calc == "5":
             tip()
-        elif to_calc == "":
-            print("Thankyou for your time.\nGoodbye...")# 1 saving time calculator = if: you want to save up to a surtain amount of money ()
+        elif to_calc == "6":
+            print("Thankyou for your time.\nGoodbye...") 
             break
         else:
             print("Invalid")
             print("Try again!!!")
             continue
-# 1 saving time calculator = if: you want to save up to a surtain amount of money ()
+ 
 def save_goal():
     # enter a savings goal how much are you trying to save (save)
-    save_to = float(input("Enter your savings goal amount: $"))# 1 saving time calculator = if: you want to save up to a surtain amount of money ()
+    save_to = float(input("Enter your savings goal amount: $")) 
     deposit = float(input("Enter deposit amount: $"))
     # how often are you saving?
     frequency = input("Do you deposit Weekly or Monthly? (w/m): ").lower
     # w weekly
     if frequency == "w":
-        breaks = save_to / deposit# 1 saving time calculator = if: you want to save up to a surtain amount of money ()
+        breaks = save_to / deposit 
         print(f"It will take you about{breaks:.1f} weeks to reach your goal.")
     # m monthly
     elif frequency == "m":
@@ -51,7 +51,7 @@ def save_goal():
         # 2 monthly
         # enter how much are you contributing? # 1 saving time calculator = if: you how much are you trying to save (save)lid answer\ntry again")
     # 1 saving time calculator = if: you want to save up to a surtain amount of money()
-# 2 compound interest # 1 saving time calculator = if: you want to save up to a surtain amount of money ()calculator ()
+# 2 compound interest  calculator ()
 def comp_int():
     principal = float(input("Enter initial amount"))
     rate = float(input("Enter annual interest rate (%): ")) /100
@@ -62,7 +62,7 @@ def comp_int():
         return principal * (1 + rate/comp_per_year) ** (comp_per_year * years)
     final_amount = calc_amount()
     print(f"Final amount after {years} years: ${final_amount:.2f}")
-# 3 budget allocator (# 1 saving time calculator = if: you want to save up to a surtain amount of money ())
+# 3 budget allocator ( )
 def budget():
     income = float(input("Enter mounthly income: $"))
     saving = int(input("enter what percent are you saving: $"))
@@ -79,25 +79,8 @@ def sale():
     percent = int(input("What percent is the discount: "))
     print(f"The item now costs {cost / percent}")
 # 5 tip clculator (adds how much = if: you have earn from tips/day)
+def tip():
+    return
 # how often are you saving?
 
-    items = []
-    costs = []
-    origonal_costs = []
-    while True:
-        item = input("Enter what is on sale: ")
-        items.    items = []
-    costs = []
-    origonal_costs = []
-    while True:
-        item = input("Enter what is on sale: ")
-        items.append(item)
-        origonal_cost = int(input(f"Enter the origonal cost of the {item}: "))
-        cost = int(input(f"Enter the percent of the {item} is on sale for: "))
-        costs.append(cost).append(item)
-        origonal_cost = int(input(f"Enter the origonal cost of the {item}: "))
-        cost = int(input(f"Enter the percent of the {item} is on sale for: "))
-        costs.append(cost)
-    
-        
-menu()
+main()            
