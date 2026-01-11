@@ -9,7 +9,7 @@
 # 1 saving time calculator ()
 # 2 compound interest calculator ()
 # 3 budget allocator ()
-# 4 sale price calculator (if an item is on sale divide it by the percent)
+# 4 sale price calculator (if an item is o.vscoden sale divide it by the percent)
 # 5 tip clculator (adds how much you have earn from tips/day) 
 
 # if menu = 1
@@ -18,7 +18,7 @@
         # 1 weekly
         # 2 monthly
         # enter how much are you contributing? (con)d
-if = if:
+
         # if save is 1
             #display (con )
 
