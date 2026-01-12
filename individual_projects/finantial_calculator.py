@@ -110,4 +110,3 @@ def tips():
 
 #run program
 main()
-#End
