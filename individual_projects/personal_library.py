@@ -48,7 +48,8 @@ def search():
     #they want to seach for
     item = input("What item do you want to search for: ")
     if item in items:
-        print("There are exactly ")
+        a = items.count(i)
+        print(f"There are exactly {a} items")
     else:
         print(f"The item {item} could not be found")
 def remove():
