@@ -7,7 +7,7 @@ items = []
 def main():
     while True:
         #instructions
-        print("1 to add\n2 to search\n3 to remove\n4 to show items\n5 to exit")
+        print("\n1 to add\n2 to search\n3 to remove\n4 to show items\n5 to exit\n")
         #enter what you want to do
         enter = input("Choose a number 1-5: ")
         #if user wants to add
@@ -29,12 +29,12 @@ def main():
         #else if user wants to exit
         elif enter == "5":
             #dysplay goodbye exit
+            print("Goodbye")
             break
         #if user enters invalid choice 
-        # display to them
-        #to try again
+        #display to them try again and enter a choice 1-5 only
         else:
-            print("Invalid choice. Try again")
+            print("\nInvalid choice. Try again.\nEnter a chioce 1-5")
 
 #Funtion to add items in the list items
 def add():
@@ -47,15 +47,19 @@ def search():
     #ask user what item 
     #they want to seach for
     item = input("What item do you want to search for: ")
-    if item in items:
-        a = items.count(i)
-        print(f"There are exactly {a} items")
+    if items.count(item) >= 2:
+        a = items.count(item)
+        print(f"There are exactly {a} items called {item}")
+    elif items.count(item) == 1:
+        a = items.count(item)
+        print(f"There is exactly {a} item called {item}")
     else:
         print(f"The item {item} could not be found")
 def remove():
     item = input("Enter an item you want to remove: ")
     if item in items:
         items.remove(item)
+        print(f"{item} has been removed")
         return items
     else:
         print(f"Sorry the {item} could not be found")
