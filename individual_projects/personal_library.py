@@ -90,7 +90,7 @@ def show():
 #wipe the library funtion
 def clear():
     #clarify they want to wipe the library
-    ask = input("Do you want to clear your library? Y/N").lower()
+    ask = input("Do you want to clear your library? y/n: ").lower()
     #approved to do it
     if ask == "yes" or "y":
         #items are cleared
