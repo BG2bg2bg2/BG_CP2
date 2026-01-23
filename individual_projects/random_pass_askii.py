@@ -1,18 +1,75 @@
 #BG 1st
 
 import random
-
+all = []
+length = []
+#funtion for main
 def main():
     while True:
-        a = input("1 = gen pass\n2 = exit")
-        if a == "1":
+        #display welcome to the random password genorator
+        print("Welcome to the random passward genorator\n")
+        #display instructoins
+        print("instructions\n")
+        #display 1 is to genorate a password that is strong
+        print("1 is to genorate a password that is strong and at least 8 characters long\n")
+        #display 2 is to exit/quit
+        print("2 is to exit/quit the program\n")
+        #ask what number it will be 1 or 2
+        choice = input("Enter a number 1 or 2: ")
+        #if user enters 1
+        if choice == "1":
+            #call genorater
             gen()
-        elif a == "2":
+        #else if user enters 2
+        elif choice == "2":
+            #end program
             break
+        #else display try again
         else:
-            print("try again")
+            print("Try again and this time enter 1 or 2\n")
+#funtion for genorating passwords
 def gen():
-    a = input("how long does your pass need to be?: ")
-    print(a)
-    b = ackii()
-    print(b)
+    while True:
+        print("1 is the defalt of 8")
+        print("2 is the defalt of 10")
+        print("3 is the defalt of 20")
+        print("4 is to choose the length of password")
+        a = input("Enter a number 1-4 ")
+        if a == "1":
+            defalt()
+        elif a == "2":
+            ten()
+        elif a == "3":
+            twentey()
+        elif a == "4":
+            calling()
+        else:
+            print("Try again but enter a number 1-4 this time")
+def defalt():
+    length = 8
+    cap = input("Does the pass require cappital letters? (Y/N): ").lower
+    low = input("Does the pass require lowercase letters? (Y/N): ").lower
+    special = input("Does the pass require special characters? (Y/N): ").lower
+    num = input("Does the pass require numbers? (Y/N): ").lower
+
+    while True:
+        if cap == "y":
+            up = True
+        elif cap == "n":
+            up = False
+        else:
+            print("Try again")
+
+        if low == "y":
+            lo = True
+        elif low == "n":
+            lo = False
+        else:
+            print("Try again")
+
+        if special == "y":
+            spe = True
+        elif special == "n":
+            spe = False
+        else:
+            print("Try again")
