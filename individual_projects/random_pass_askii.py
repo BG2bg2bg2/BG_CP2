@@ -2,7 +2,14 @@
 
 import random
 all = []
-length = []
+length = 0
+what = []
+
+come = lo, spe, up, n
+for i in range(length):
+    if random.come([lo, spe, up, n]):
+        what.append(chr(random.randint(65, 90)))
+
 #funtion for main
 def main():
     while True:
@@ -46,12 +53,14 @@ def gen():
         else:
             print("Try again but enter a number 1-4 this time")
 def defalt():
+    
     length = 8
-    cap = input("Does the pass require cappital letters? (Y/N): ").lower
-    low = input("Does the pass require lowercase letters? (Y/N): ").lower
-    special = input("Does the pass require special characters? (Y/N): ").lower
-    num = input("Does the pass require numbers? (Y/N): ").lower
-
+    
+    cap = input("Does the pass require cappital letters? (Y/N): ").lower()
+    low = input("Does the pass require lowercase letters? (Y/N): ").lower()
+    special = input("Does the pass require special characters? (Y/N): ").lower()
+    num = input("Does the pass require numbers? (Y/N): ").lower()
+    
     while True:
         if cap == "y":
             up = True
@@ -72,4 +81,14 @@ def defalt():
         elif special == "n":
             spe = False
         else:
+            print("try again")
+
+        if num == "y":
+            n = True
+        elif num == "n":
+            n == False
+        else:
             print("Try again")
+
+        return come == up, lo, spe, n
+

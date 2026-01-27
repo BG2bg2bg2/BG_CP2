@@ -25,27 +25,39 @@ def gen():
     while True:
         #user specifies the length and if they want to include
         a = input("How long does the pass need to be: ")
-        if a >= 8:
+        if a >= "8":
             #funtion for uppercase letters
             b = input("Do you need uppercase Y/N: ")
             c = input("Do you need lowercase Y/N: ")
             d = input("Do you need number letters Y/N: ")
             e = input("Do you need special characters letters Y/N: ")
             if b == "y":
-                f = random.random(len(upper))
+                f = True
+            elif b == "n":
+                f = False
+
             if c == "y":
-                g = random.random(len(lower))
+                g = True
+            elif c == "n":
+                g = False
+
             if d == "y":
-                h = random.random(len(number))
-                password.append()
+                h = True
+            elif d == "n":
+                h = False
+
             if e == "y":
-                i = random.random(len(special))
-            print(f,g,h,i,a)
-            return z.append(f,g,h,i)
+                i = True
+            elif e == "n":
+                i = False
+
+            return b, c, d, e
         else:
             print("Try again")
             continue
 #function that assembles the password once it is the correct length
+def what(b,c,d,e):
+    
 
     
     #function for lowercase letters
