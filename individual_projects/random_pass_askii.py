@@ -4,12 +4,10 @@ import random
 all = []
 length = 0
 what = []
-
-come = lo, spe, up, n
-for i in range(length):
-    if random.come([lo, spe, up, n]):
-        what.append(chr(random.randint(65, 90)))
-
+what1 = []
+what2 = []
+what3 = []
+come = []
 #funtion for main
 def main():
     while True:
@@ -90,5 +88,17 @@ def defalt():
         else:
             print("Try again")
 
-        return come == up, lo, spe, n
-
+        come = [up, lo, spe, n]
+        for _ in range(length):
+            if random.come[lo, spe, up, n]:
+                if up == True:
+                    what.append(chr(random.randint(65, 90)))
+                elif lo == True:
+                    what1.append(chr(random.randint(97, 122)))
+                elif spe == True:
+                    what2.append(chr(random.randint(33,47)))
+                elif n == True:
+                    what3.append(chr(random.randint(48,57)))
+        result = ''.join(what, what1, what2, what3)
+        all = random.random(result, length)
+        print(all)
