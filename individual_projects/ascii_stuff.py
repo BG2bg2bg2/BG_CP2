@@ -116,7 +116,10 @@ def generate_password(length):
             # retry if that type wasn't allowed
             password.append(chr(random.randint(97, 122)))
 
-    #if password does not have the wanted type
+    #if password does not have the wanted types
+    #if password == ["upper", "lower", 'num', 'special']
+        #print(password)
+    #else if password does not have any of the wanted items
     #regenorate
     print("\nGenerated password:", ''.join(password))
 
