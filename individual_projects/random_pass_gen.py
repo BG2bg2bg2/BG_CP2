@@ -1,5 +1,5 @@
 #BG 1st
-
+#use premade libraries
 import random
 import string
 #function for main
@@ -68,7 +68,7 @@ def gen():
         elif a == "4":
             #check for valid number was entered
             try:
-                #Ask user to enter a number for the length of password
+                #ask user to enter a number for the length of password
                 length = int(input("Enter a number for the length of the pass: "))
                 #if length is less than 8
                 if length < 8:
@@ -80,7 +80,7 @@ def gen():
                 geno(length)
                 #end loop
                 break
-            #If user does not enter a valid number
+            #if user does not enter a valid number
             except ValueError:
                 #display please enter a valid number
                 print("Please enter a valid number.")
@@ -104,11 +104,11 @@ def geno(length):
         #check user inputs for validity
         #if capitals are needed
         if cap == "y":
-            #upercase is true
+            #upercase is needed as true
             up = True
         #else if capitals are not needed
         elif cap == "n":
-            #uppercase is false
+            #uppercase is not needed as false
             up = False
         #else
         else:
@@ -119,52 +119,68 @@ def geno(length):
         
         #if lowercase are needed
         if low == "y":
-            #lowercase is true
+            #lowercase is needed as true
             lo = True
         #else if lowercase are not needed
         elif low == "n":
+            #lowercase is not needed as false
             lo = False
+        #else
         else:
+            #display try again
             print("Try again")
+            #restart loop
             continue
-
+        #if special characters are needed
         if special == "y":
+            #special characters is needed as true
             spe = True
+        #else if special characters are not needed
         elif special == "n":
+            #special characters is not needed as false
             spe = False
+        #else
         else:
+            #display try again
             print("Try again")
+            #restart loop
             continue
-
+        #if numbers are needed
         if num == "y":
+            #numbers is needed as true
             n = True
+        #else if numbers are not needed
         elif num == "n":
+            #numbers is not needed as false
             n = False
+        #else
         else:
+            #display try again
             print("Try again")
+            #restart loop
             continue
 
-        # Build character set based on what user wants
+        #start the build password prosses based on what user wants
         char_set = ""
-        #if up is True 
+        #if up is needed as true
         if up:
             #add uppercase letters to char_set
             char_set += string.ascii_uppercase
-        #if lo is True
+        #if lo is needed as true
         if lo:
-            #add lowercase letters to char_se
+            #add lowercase letters to char_set
             char_set += string.ascii_lowercase
-        #if spe is True 
+        #if spe is needed as true
         if spe:
             #add special characters to char_set
             char_set += string.punctuation
-        #if n is True
+        #if n is needed as true
         if n:
             #add digits to char_set
             char_set += string.digits
         
-        # Generate password
-        #if password what user wants are not met
+        #generate password
+        #if the password that the user wants are not met
         #regenerate the password
         if not char_set:
             #display no character types selected
@@ -172,14 +188,14 @@ def geno(length):
             #restart loop
             continue
         
-        # Generate password and verify it meets what user wants
+        #generate password and verify it meets what user wants
         password_valid = False
-        #while password valid is false
+        #until password is valid stop
         while not password_valid:
             #generate a random password from char_set of given length
             password = ''.join(random.choice(char_set) for _ in range(length))
             
-            # Check if password contains user wants it character types
+            #check if password contains what the user wants for the character types
             #check for uppercase letters if user wants it
             has_upper = any(c in string.ascii_uppercase for c in password) if up else True
             #check for lowercase letters if user wants it
@@ -189,12 +205,16 @@ def geno(length):
             #check for numbers if user wants it
             has_number = any(c in string.digits for c in password) if n else True
             
-            # If all user wants it types are present, password is valid
+            #check if all that the user wants are present and/or password is valid
             if has_upper and has_lower and has_special and has_number:
                 #password valid is true
                 password_valid = True
                 #stops the loop/checks
-        
-        print(f"Generated password: {password}")
+        #for passwords 1-4
+        for i in range(4):
+            #generate a random password from char_set of given length
+            password = ''.join(random.choice(char_set) for _ in range(length))
+            #display generated password
+            print(f"Generated password {i+1}: {password}")
         break
 main()
