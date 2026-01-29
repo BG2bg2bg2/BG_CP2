@@ -216,5 +216,7 @@ def geno(length):
             password = ''.join(random.choice(char_set) for _ in range(length))
             #display generated password
             print(f"Generated password {i+1}: {password}")
+        #end loop
         break
+#call main funtion
 main()
