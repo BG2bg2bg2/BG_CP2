@@ -22,9 +22,22 @@ while True:
         break
 #What is a CSV file Download CSV file?
 try:
-    with open("C:\Users\brett.gerlach\Downloads\Class CSV sample - Sheet1.csv", mode = "r") as File:
+    with open("Notes\\Sample.csv", mode = "r") as csv_file:
     #CSV = comma Seporated Values files
-    
+    content = csv.reader(csv_file)
+    headers= next(content)
+    rows = []
+    for line in content:
+        print(f"{line[0]}: {line[1]}")
+except:
+    print("Can't find the CSV")
+else:
+    print("Code ends")
+    for line in rows:
+        print(line)
 #How are they used in programming?
 
+
+
 #How id reading a CSV different from reading a txt file?
+
