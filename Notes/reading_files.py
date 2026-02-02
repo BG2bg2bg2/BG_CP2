@@ -23,12 +23,12 @@ while True:
 #What is a CSV file Download CSV file?
 try:
     with open("Notes\\Sample.csv", mode = "r") as csv_file:
-    #CSV = comma Seporated Values files
-    content = csv.reader(csv_file)
-    headers= next(content)
-    rows = []
-    for line in content:
-        print(f"{line[0]}: {line[1]}")
+        #CSV = comma Seporated Values files
+        contnt = csv.reader(csv_file)
+        headers= next(contnt)
+        rows = []
+        for line in contnt:
+            rows.append({headers[0]:line[0], headers[1]: line[1]})
 except:
     print("Can't find the CSV")
 else:
