@@ -1,4 +1,4 @@
-#BG 1st reading files
+#BG 1st reading files notes
 import csv
 while True:
     try:
@@ -36,8 +36,10 @@ else:
     for line in rows:
         print(line)
 #How are they used in programming?
-
+#You can find an item in dictionaries
+#you you can add stuff to each line/word in strings
 
 
 #How id reading a CSV different from reading a txt file?
-
+#CSV can be converted into dictionary
+#string for txt
