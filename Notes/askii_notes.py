@@ -1,3 +1,4 @@
+#BG 1st askii notes
 import random
 
 chars = []
