@@ -4,9 +4,14 @@
 import csv
 
 #funtion for seaching length
+def length_of_movie():
+    with open("BG_CP2\individual_projects\\Movies_list.csv", "r") as file:
+        print("hi")
     #
 
 #funtion for searching names, titles, rating, genra
+def seaching():
+    print("Hi")
     #
 
 #main funtion
