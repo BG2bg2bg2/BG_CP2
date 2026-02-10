@@ -13,7 +13,9 @@ def load_movies(filepath):
     try:
         with open(filepath, mode="r", encoding="utf-8") as f:
             pass
+    #if file cant be found
     except FileNotFoundError:
+        #display movie list file not found
         raise FileNotFoundError(f"Movie list file not found: {filepath}")
     
     try:
@@ -166,9 +168,7 @@ def pretty_print_movies(movies, title=""):
     
     #display title if provided
     if title:
-        print(f"\n{'='*80}")
         print(title)
-        print(f"{'='*80}\n")
     
     #display movie count
     print(f"Found {len(movies)} movie(s):\n")
@@ -244,7 +244,7 @@ def search_actor(movies):
     #if results found
     if results:
         #display results
-        pretty_print_movies(results, f"Movies starring: {actor}")
+        pretty_print_movies(results, f"Movies with actor(s): {actor}")
     #if no results found
     else:
         #display no results message
@@ -479,7 +479,8 @@ def custom_search(movies):
 def main():
     #get the csv file path
     csv_path = "individual_projects/Movies_list.csv"
-    #load movies
+    
+    #try to load movies
     try:
         #load movies from csv file
         movies = load_movies(csv_path)
@@ -541,4 +542,4 @@ def main():
 
 
 #start/run/call main function
-main()  #execute main function
+main()
