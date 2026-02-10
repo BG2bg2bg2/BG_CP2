@@ -41,6 +41,7 @@ def main():
             length_of_movie()
         elif user != allowed:
             print("must enter a valid number")
+            continue
         else:
             seaching()
 #call main
