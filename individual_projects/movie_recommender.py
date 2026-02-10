@@ -5,9 +5,25 @@ import csv
 
 #funtion for seaching length
 def length_of_movie():
-    with open("BG_CP2\individual_projects\\Movies_list.csv", "r") as file:
-        print("hi")
-    #
+    
+        try:
+            user_min_move = int(input("How long do you want the minimum length of the movies be?: "))
+            user_max_move = int(input("How long do you want the maxumom movie be?: "))
+            filers = "BG_CP2\individual_projects\\Movies_list.csv"
+            with open(filers, mode = "r", encodeing ="utf-8") as file:
+                print(f"Movies between {user_min_move} and {user_max_move} minutes:")    
+                found = False
+                for row in content:
+                    
+                    move_len = int(row['Length (min)'])
+
+                    if user_min_move <= move_len <= user_max_move:
+                        print(f"{row['Title', 'Director', 'Genre', 'Rating', 'Motable Actors']} ({move_len} min)")
+                    content = csv.DictReader(file)
+
+                    print("-")
+        except:
+            print("Cant find the movie")
 
 #funtion for searching names, titles, rating, genra
 def seaching():
