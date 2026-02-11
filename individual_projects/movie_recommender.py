@@ -1,9 +1,9 @@
 #bg 1st movie recommendations program
-
+#needed libraries
 import csv
 
 
-
+#function to load and normalize movie data from csv file
 def load_movies(filepath):  
     #load and normalize movie data from csv file. args: filepath (str): path to csv file. returns: list: list of dictionaries with normalized movie data. raises: filenotfounderror: if csv file doesn't exist. valueerror: if csv is malformed
     
