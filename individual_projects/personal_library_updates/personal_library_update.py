@@ -1,32 +1,9 @@
-#BG 1st update personal library
-
-#libraries for importing/exporting csv data
-
-#funtion for searching in csv file as "csvff()"
-    #display "1 to add onto the csv file\n2 to clear and write on the csv file\n3 to read on the csv file\n4 to read and write on the csv file\n5 to go back to main menu"
-    #user enters a number of what they want to do
-    #if user entered 1
-        #display and ask "You want to put/add something but it must be in a dictionary like form ex: name: Bob, color: red, fav_food: pancake"
-        #call csvff() funtion
-    #else if user entered 2
-
-    #else if user entered 3
-    #else if user entered 4
-    #else if user entered 5
-#funtion for searching in text file
-#funtion for main
-
-
-
 #BG 1st personal library
-
-#funtion for list of items, sets of items, tuples of items
 
 #main function of choice
 def main():
-    items = []
-    sets = ("Title", "Author","writer", "song")
-
+    lists = []
+    display = ("Author", "Title", "Genra", "Year", "Series")
     while True:
         #instructions
         print("\n1 to add\n2 to search\n3 to remove\n4 to show items\n5 clear\n6 to exit\n")
@@ -35,21 +12,21 @@ def main():
         #if user wants to add
         if enter == "1":
             #call function adding as add
-            add(items, sets)
+            add()
         #else if user wants to search
         elif enter == "2":
             #call funtion searching as search
-            search(items, sets)
+            search()
         #else if user wants remove
         elif enter == "3":
             #call funtions removing as remove
-            removes(items, sets)
+            remove()
         #else if user wants to see what they have
         elif enter == "4":
             #call funtion showing list as show
-            show(items, sets)
+            show()
         elif enter == "5":
-            clear(items)
+            clear()
         #else if user wants to exit
         elif enter == "6":
             #dysplay goodbye exit
@@ -61,8 +38,7 @@ def main():
             print("\nInvalid choice. Try again.\nEnter a chioce 1-5")
 
 #Funtion to add items in the list items
-def add(items, sets):
-    print(sets)
+def add():
     #ask user what they want to add
     item = input("Enter an item that you want to add: ")
     #add that item to the library
@@ -70,8 +46,7 @@ def add(items, sets):
     #update library
     return items
 #funtion to seach items
-def search(items, sets):
-    
+def search():
     #ask user what item 
     #they want to seach for
     item = input("What item do you want to search for: ")
@@ -92,8 +67,7 @@ def search(items, sets):
         #display no items are found with that name
         print(f"The item {item} could not be found")
 #remove funtcion
-def removes(items, sets):
-    
+def remove():
     #ask what item they want to remove
     item = input("Enter an item you want to remove: ")
     #if the item is in the library
@@ -109,14 +83,11 @@ def removes(items, sets):
         #display no items called can't be found 
         print(f"Sorry the {item} could not be found")
 #show the list library
-def show(items, sets):
-    
+def show():
     #display every item in the library
-    print(sets)
     print(items)
 #wipe the library funtion
-def clear(items):
-    
+def clear():
     #clarify they want to wipe the library
     ask = input("Do you want to clear your library? y/n: ").lower()
     #approved to do it
