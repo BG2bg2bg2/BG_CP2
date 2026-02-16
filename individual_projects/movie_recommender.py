@@ -281,7 +281,7 @@ def search_rating(movies):
     #return filtered results
     return results
 
-
+#funtiong for searching genre in the movies list
 def search_genre(movies):
     #interactive genre search.
     #get genre input

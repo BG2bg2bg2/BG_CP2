@@ -26,19 +26,11 @@ def main():
             #call funtion showing list as show
             show()
         elif enter == "5":
-            clear()
-        #else if user wants to exit
-        elif enter == "6":
-            #dysplay goodbye exit
-            print("Goodbye")
             break
         #if user enters invalid choice 
         #display to them try again and enter a choice 1-5 only
         else:
             print("\nInvalid choice. Try again.\nEnter a chioce 1-5")
-
-#Funtion to add items in the list items
-def add():
     #ask user what they want to add
     item = input("Enter an item that you want to add: ")
     #add that item to the library
