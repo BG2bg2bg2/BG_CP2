@@ -1,2 +1,0 @@
-This filder holds the test cases for your project (Not learned till prgraming 3). --
-    -- These are written by you to make sure your code doesn't break itself!
