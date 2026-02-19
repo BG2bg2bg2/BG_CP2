@@ -1,3 +1,5 @@
 Welcome to the CSV file
 
-"book title", "author","published date", "editor"
+title, author, editor, publisher, year of first published, stock, cost
+
+The Lion the Witch and the Wardrobe, C.S. Leiwis, New York Times, 3, 3.45
