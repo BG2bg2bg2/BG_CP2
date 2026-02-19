@@ -1,422 +1,297 @@
-#bg 1st book recommendations program
-#needed libraries
+#BG 1st update personal library
+#import csv module
 import csv
 
+#set default field names for library items
+FIELDNAMES = ["title", "creator", "year", "genre", "format", "rating", "notes"]
 
-#function to load and normalize book data from csv file
-def load_books(filepath):  
-    #load and normalize book data from csv file. args: filepath (str): path to csv file. returns: list: list of dictionaries with normalized book data. raises: filenotfounderror: if csv file doesn't exist. valueerror: if csv is malformed
-    
-    #initialize books list
-    books = []
-    
+
+def load_library(path):
+    #load items from csv file or create empty file if not exists
+    #initialize empty items list
+    items = []
+    #attempt to open and read file
     try:
-        with open(filepath, mode="r", encoding="utf-8") as f:
-            pass
-    #if file cant be found
-    except FileNotFoundError:
-        #display book list file not found
-        raise FileNotFoundError(f"book list file not found: {filepath}")
-    
-    try:
-        with open(filepath, mode="r", encoding="utf-8") as file:
-            reader = csv.DictReader(file)
+        #open the file for reading in utf-8 encoding
+        with open(path, newline="", encoding="utf-8") as f:
+            #create csv dictionary reader from file
+            reader = csv.DictReader(f)
+            #check if reader has no field names
             if not reader.fieldnames:
-                raise ValueError("CSV file is empty or malformed")
-            
-            #iterate through csv rows
-            for row_num, row in enumerate(reader, start=2):
-                #check if title exists
-                if not row.get('Title'):
-                    print(f"Warning: Skipping empty row {row_num}")
+                #display warning message about missing header
+                print(f"Warning: '{path}' has no header, using defaults.")
+                #set field names to default
+                reader.fieldnames = FIELDNAMES
+            #loop through each row in reader starting from row 2
+            for rownum, row in enumerate(reader, start=2):
+                #create item dict with lowercase keys and stripped values
+                item = {k.strip(): v.strip() for k, v in row.items() if k}
+                #check if item has title and creator
+                if not item.get("title") or not item.get("creator"):
+                    #display warning for missing required fields
+                    print(f"Warning: skipping malformed row {rownum} in {path}")
+                    #skip this row and continue to next
                     continue
-                #normalize the book record
-                normalized_book = {
-                    'Title': row.get('Title', '').strip(),
-                    'editor': row.get('editor', '').strip(),
-                    'Genre': row.get('Genre', '').strip(),
-                    'cost': row.get('cost', '').strip(),
-                    'authors': row.get('authors', '').strip(),
-                }
-                books.append(normalized_book)
-    
-    except ValueError as e:
-        raise ValueError(f"Error parsing CSV file: {e}")
-    
-    return books
+                #add item to items list
+                items.append(item)
+    #handle file not found error
+    except FileNotFoundError:
+        #create new file with header
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            #create csv writer with fieldnames
+            writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+            #write header row
+            writer.writeheader()
+    #return list of items
+    return items
 
 
-def filter_by_genre(books, genre_query):
-    #filter books by genre (case-insensitive substring match). args: books (list): list of book dictionaries. genre_query (str): genre to search for. returns: list: filtered books matching the genre
-    
-    if not genre_query or genre_query.lower() == 'skip':
-        return books
-    
-    query = genre_query.strip().lower()
-    return [m for m in books if query in m['Genre'].lower()]
+def save_library(path, items):
+    #save items list to csv file at path
+    #open file for writing in utf-8 encoding
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        #create csv writer with fieldnames
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        #write header row
+        writer.writeheader()
+        #loop through each item
+        for item in items:
+            #write item row to csv file
+            writer.writerow({k: item.get(k, "") for k in FIELDNAMES})
 
 
-def filter_by_editor(books, editor_query):
-    #filter books by editor (case-insensitive substring match). args: books (list): list of book dictionaries. editor_query (str): editor name to search for. returns: list: filtered books matching the editor
-    
-    if not editor_query or editor_query.lower() == 'skip':
-        return books
-    
-    query = editor_query.strip().lower()
-    return [m for m in books if query in m['editor'].lower()]
-
-
-def filter_by_author(books, author_query):
-    #filter books by author name (case-insensitive substring match). args: books (list): list of book dictionaries. author_query (str): author name to search for. returns: list: filtered books matching the author
-    
-    if not author_query or author_query.lower() == 'skip':
-        return books
-    
-    query = author_query.strip().lower()
-    return [m for m in books if query in m['Notable authors'].lower()]
-
-
-def filter_by_cost(books, cost_query):
-    #filter books by cost (case-insensitive exact match). args: books (list): list of book dictionaries. cost_query (str): cost to search for (e.g., 'pg', 'r', 'pg-13'). returns: list: filtered books matching the cost
-    
-    if not cost_query or cost_query.lower() == 'skip':
-        return books
-    
-    query = cost_query.strip().upper()
-    return [m for m in books if m['cost'].upper() == query]
-
-
-
-
-def apply_filters(books, genre=None, editor=None, author=None, cost=None):
-    #apply multiple filters using and logic (all filters must match). args: books (list): list of book dictionaries. genre (str): genre filter (optional). editor (str): editor filter (optional). author (str): author filter (optional). cost (str): cost filter (optional). filter (optional). returns: tuple: (filtered_books, applied_filters_count)
-    
-    #start with all books
-    result = books
-    #count of filters applied
-    filters_applied = 0
-    
-    #apply genre filter if provided
-    if genre:
-        result = filter_by_genre(result, genre)
-        #increment filter count
-        filters_applied += 1
-    
-    #apply editor filter if provided
-    if editor:
-        result = filter_by_editor(result, editor)
-        #increment filter count
-        filters_applied += 1
-    
-    #apply author filter if provided
-    if author:
-        result = filter_by_author(result, author)
-        #increment filter count
-        filters_applied += 1
-    
-    #apply cost filter if provided
-    if cost:
-        result = filter_by_cost(result, cost)
-        #increment filter count
-        filters_applied += 1
-    
-    #return filtered books and count
-    return result, filters_applied
-
-
-
-def pretty_print_books(books, title=""):
-    #pretty-print a list of books in tabular format. args: books (list): list of book dictionaries to display. title (str): optional title for the display
-    
-    #check if books list is empty
-    if not books:
-        print("No books found.")
+def display_simple(items):
+    #display title and creator for each item
+    #check if items list is empty
+    if not items:
+        #display empty library message
+        print("Library is empty.")
+        #exit function
         return
-    
-    #display title if provided
-    if title:
-        print(title)
-    
-    #display book count
-    print(f"Found {len(books)} book(s):\n")
-    
-    #iterate through each book
-    for i, book in enumerate(books, 1):
-        #display book title
-        print(f"{i}. {book['Title']}")
-        #display editor
-        print(f"   editor: {book['editor']}")
-        #display genre
-        print(f"   Genre: {book['Genre']}")
-        #display cost
-        print(f"   cost: {book['cost']}")
-        #display authors
-        print(f"   Notable authors: {book['Notable authors']}")
-        #blank line for readability
+    #loop through items with index starting at 1
+    for idx, it in enumerate(items, 1):
+        #print item number, title, and creator
+        print(f"{idx}. {it.get('title','')} - {it.get('creator','')}")
+
+
+def display_detailed(items):
+    #display all details for each item
+    #check if items list is empty
+    if not items:
+        #display empty library message
+        print("Library is empty.")
+        #exit function
+        return
+    #loop through items with index starting at 1
+    for idx, it in enumerate(items, 1):
+        #print item number
+        print(f"{idx}.")
+        #loop through each field in fieldnames
+        for field in FIELDNAMES:
+            #print field name and value
+            print(f"   {field.title()}: {it.get(field,'')}")
+        #print blank line for readability
         print()
 
 
-def print_full_list(books):
-    #display all books in the database. args: books (list): list of all books
-    
-    #call pretty print with all books
-    pretty_print_books(books, "COMPLETE book DATABASE")
-
-
-def print_welcome():
-    #display welcome message and options
-    #display menu options
-    print("Hi, and welcome to book Recommendations!\n1 to search by editor\n2 to search by author\n3 to search by cost\n4 to search by genre\n5 for custom multi-filter search\n6 to show all books\n7 to exit")
-
-
-def search_editor(books):
-    #interactive editor search.
-    #get editor input
-    editor = input("Enter editor name (or 'skip' to skip): ").strip()
-    #check if user wants to skip
-    if editor.lower() == 'skip':
-        #return unchanged books list
-        return books
-    
-    #filter by editor
-    results = filter_by_editor(books, editor)
-    #if results found
-    if results:
-        #display results
-        pretty_print_books(results, f"books directed by: {editor}")
-    #if no results found
-    else:
-        #display no results message
-        print(f"\nNo books found by editor '{editor}'.")
-        #provide suggestion
-        print("Try a shorter name or check the spelling.")
-    
-    #return filtered results
-    return results
-
-
-def search_author(books):
-    #interactive author search.
-    #get author input
-    author = input("Enter author name (or 'skip' to skip): ").strip()
-    #check if user wants to skip
-    if author.lower() == 'skip':
-        #return unchanged books list
-        return books
-    
-    #filter by author
-    results = filter_by_author(books, author)
-    #if results found
-    if results:
-        #display results
-        pretty_print_books(results, f"books with author(s): {author}")
-    #if no results found
-    else:
-        #display no results message
-        print(f"\nNo books found with author '{author}'.")
-        #provide suggestion
-        print("Try a shorter name or check the spelling.")
-    
-    #return filtered results
-    return results
-
-
-def search_cost(books):
-    #interactive cost search.
-    #display valid costs
-    print("Valid costs: G, PG, PG-13, R, Not Rated")
-    #get cost input
-    cost = input("Enter cost (or 'skip' to skip): ").strip()
-    #check if user wants to skip
-    if cost.lower() == 'skip':
-        #return unchanged books list
-        return books
-    
-    #filter by cost
-    results = filter_by_cost(books, cost)
-    #if results found
-    if results:
-        #display results
-        pretty_print_books(results, f"books with cost: {cost}")
-    #if no results found
-    else:
-        #display no results message
-        print(f"\nNo books found with cost '{cost}'.")
-    
-    #return filtered results
-    return results
-
-#funtiong for searching genre in the books list
-def search_genre(books):
-    #interactive genre search.
-    #get genre input
-    genre = input("Enter genre (Drama, Action, Comedy, etc., or 'skip' to skip): ").strip()
-    #check if user wants to skip
-    if genre.lower() == 'skip':
-        #return unchanged books list
-        return books
-    
-    #filter by genre
-    results = filter_by_genre(books, genre)
-    #if results found
-    if results:
-        #display results
-        pretty_print_books(results, f"books in genre: {genre}")
-    #if no results found
-    else:
-        #display no results message
-        print(f"\nNo books found in genre '{genre}'.")
-        #provide suggestion
-        print("Try related genres or check the spelling.")
-    
-    #return filtered results
-    return results
-
-def update(books):
-    #funtion for updating books
-    #ask user what they want to update
+def input_nonempty(prompt):
+    #keep prompting until user enters non-empty input
+    #loop forever until return
     while True:
-        book_update = input("What do you want to update 1 to add a book, 2 to update cost, 3 to delete book, 4 to save library.")
-        if book_update == "1":
-            title = input("Enter the title of the book")
-            author = input("Enter the writer of the book")
-            editor = input("Enter the editor of the book")
-            add_published_date = input("Enter the year of the book it was first published")
-            cost = float(input("Enter how much the book cost $"))
-            stock = int("Enter how many books are in stock")
-            return books.append(author,cost,editor, stock, title, add_published_date)
-def custom_search(books):
-    #interactive custom multi-filter search.
-    #display instructions
-    print("\nCombine multiple filters (all filters must match).\n")
-    #get title input
-    title = input("Title (or press enter to skip): ").strip() or None
-    #get genre input
-    genre = input("Genre (or press enter to skip): ").strip() or None
-    #get editor input
-    editor = input("editor (or press enter to skip): ").strip() or None
-    #get author input
-    author = input("author (or press enter to skip): ").strip() or None
-    #get cost input
-    cost = input("cost (or press enter to skip): ").strip() or None
+        #get user input and strip whitespace
+        val = input(prompt).strip()
+        #check if input is not empty
+        if val:
+            #return the non-empty value
+            return val
+        #display error message for empty input
+        print("Input cannot be empty.")
 
-    
-    #apply all filters with and logic
-    results, filters_count = apply_filters(
-        books,
-        title=title,
-        genre=genre,
-        editor=editor,
-        author=author,
-        cost=cost
-    )
-    
-    #initialize filter summary
-    filter_summary = []
-    #if title was provided
-    if title:
-        #add to summary
-        filter_summary.append(f"genre '{genre}'")
-    #if genre was provided
-    if genre:
-        #add to summary
-        filter_summary.append(f"genre '{genre}'")
-    #if editor was provided
-    if editor:
-        #add to summary
-        filter_summary.append(f"editor '{editor}'")
-    #if author was provided
-    if author:
-        #add to summary
-        filter_summary.append(f"author '{author}'")
-    #if cost was provided
-    if cost:
-        #add to summary
-        filter_summary.append(f"cost '${cost}'")
-    
-    #if results found
-    if results:
-        #create title from filters
-        title = f"books matching: {', '.join(filter_summary)}"
-        #display results
-        pretty_print_books(results, title)
-    #if no results found
-    else:
-        #display no results message
-        print(f"\nNo books match your criteria.")
-        #if filters were applied
-        if filter_summary:
-            #show attempted filters
-            print(f"Tried filtering by: {', '.join(filter_summary)}")
-        #provide suggestion
-        print("Try relaxing one or more filters.")
-    #return filtered results
-    return results
-#main function that runs the program with persistent menu.
-def main():
-    #get the csv file path
-    csv_path = "BG_CP2/individual_projects/personal_library_updates/personal_library_update.csv"
-    
-    #try to load books
-    try:
-        #load books from csv file
-        books = load_books(csv_path)
-        #display count of loaded books
-        print(f"Found {len(books)} recommended books!")
-    #if file not found or csv error
-    except (FileNotFoundError, ValueError) as e:
-        #display error message
-        print(f"ERROR: {e}")
-        #exit program
+
+def add_item(items):
+    #display instructions for adding new item
+    print("Adding new item. Leave optional fields blank.")
+    #create empty dictionary for new item
+    new = {}
+    #prompt for title until non-empty
+    new["title"] = input_nonempty("Title: ")
+    #prompt for creator until non-empty
+    new["creator"] = input_nonempty("Creator (author/artist/director): ")
+    #prompt for year and strip whitespace
+    new["year"] = input("Year: ").strip()
+    #prompt for genre and strip whitespace
+    new["genre"] = input("Genre: ").strip()
+    #prompt for format and strip whitespace
+    new["format"] = input("Format: ").strip()
+    #prompt for rating and strip whitespace
+    new["rating"] = input("Rating: ").strip()
+    #prompt for notes and strip whitespace
+    new["notes"] = input("Notes: ").strip()
+    #add new item to items list
+    items.append(new)
+    #display confirmation message
+    print("Item added.")
+
+
+def choose_index(items, action):
+    #prompt user to choose item index for action
+    #check if items list is empty
+    if not items:
+        #display empty library message
+        print("Library is empty.")
+        #return none for cancelled
+        return None
+    #display simple list of items
+    display_simple(items)
+    #loop forever until valid selection
+    while True:
+        #prompt user for item number
+        resp = input(f"Enter the number of the item to {action} (or 'c' to cancel): ").strip()
+        #check if user entered cancel
+        if resp.lower() == 'c':
+            #return none for cancelled
+            return None
+        #check if response is a digit
+        if not resp.isdigit():
+            #display error for invalid input
+            print("Please enter a valid number.")
+            #continue loop
+            continue
+        #convert response to 0-based index
+        i = int(resp) - 1
+        #check if index is in valid range
+        if 0 <= i < len(items):
+            #return valid index
+            return i
+        #display error for out of range
+        print("Number out of range.")
+
+
+def update_item(items):
+    #get index of item to update
+    idx = choose_index(items, "update")
+    #check if user cancelled
+    if idx is None:
+        #exit function
         return
-    #main menu loop
+    #get item at chosen index
+    item = items[idx]
+    #display instruction to user
+    print("Press Enter to keep current value.")
+    #loop through each field in fieldnames
+    for field in FIELDNAMES:
+        #get current value of field
+        current = item.get(field, "")
+        #prompt user for new value
+        new = input(f"{field.title()} [{current}]: ").strip()
+        #check if user entered new value
+        if new:
+            #update field with new value
+            item[field] = new
+    #display confirmation message
+    print("Item updated.")
+
+
+def delete_item(items):
+    #get index of item to delete
+    idx = choose_index(items, "delete")
+    #check if user cancelled
+    if idx is None:
+        #exit function
+        return
+    #remove and store item at index
+    removed = items.pop(idx)
+    #display confirmation with removed item title
+    print(f"Removed '{removed.get('title','')}'.")
+
+
+def main():
+    #set file path to personal library update csv
+    path = "individual_projects/personal_library_updates/personal_library_update.csv"
+    #load library from file
+    library = load_library(path)
+    #initialize changed flag as false
+    changed = False
+    #create menu string with all options
+    menu = (
+        "\nMain menu:\n"
+        "1 Show simple list\n"
+        "2 Show detailed list\n"
+        "3 Add item\n"
+        "4 Update item\n"
+        "5 Delete item\n"
+        "6 Save library\n"
+        "7 Reload library from file\n"
+        "8 Exit\n"
+    )
+    #main loop that runs until user exits
     while True:
-        #display welcome menu
-        print_welcome()
-        #get choice
-        choice = input("What would you like to do? (Enter 1-7): ").strip()
-        #search by editor
-        if choice == "1":
-            #call editor search
-            search_editor(books)
-        #search by author
-        elif choice == "2":
-            #call author search
-            search_author(books)
-        #search by cost
-        elif choice == "3":
-            #call cost search
-            search_cost(books)
-        #search by genre
-        elif choice == "4":
-            #call genre search
-            search_genre(books)
-        #custom multi-filter search
-        elif choice == "5":
-            #call custom search
-            custom_search(books)
-        #show all books
-        elif choice == "6":
-            #display all books
-            print_full_list(books)
-        #update book folder
-        elif choice == "7":
-            #call update books
-            update(books)
-        #exit program
-        elif choice == "":
-            #goodbye message
-            print("\nThank you for using book Recommendations. Goodbye!")
-            #exit loop
+        #display menu to user
+        print(menu)
+        #get user choice
+        choice = input("Choose an action: ").strip()
+        #check if user chose show simple list
+        if choice == '1':
+            #display simple view of library
+            display_simple(library)
+        #check if user chose show detailed list
+        elif choice == '2':
+            #display detailed view of library
+            display_detailed(library)
+        #check if user chose add item
+        elif choice == '3':
+            #call add item function
+            add_item(library)
+            #mark library as changed
+            changed = True
+        #check if user chose update item
+        elif choice == '4':
+            #call update item function
+            update_item(library)
+            #mark library as changed
+        elif choice == '6':
+            #save library to file
+            save_library(path, library)
+            #display success message
+            print("Library saved.")
+            #mark library as not changed
+            changed = False
+        #check if user chose reload library
+        elif choice == '7':
+            #check if library has unsaved changes
+            if changed:
+                #warn user about losing changes
+                ans = input("Unsaved changes will be lost. Continue? (y/n): ").strip().lower()
+                #check if user said no
+                if ans != 'y':
+                    #go back to main menu
+                    continue
+            #load library from file
+            library = load_library(path)
+            #mark library as not changed
+            changed = False
+            #display success message
+            print("Library reloaded.")
+        #check if user chose exit
+        elif choice == '8':
+            #check if library has unsaved changes
+            if changed:
+                #prompt user to save before exiting
+                ans = input("You have unsaved changes. Save before exiting? (y/n): ").strip().lower()
+                #check if user said yes
+                if ans == 'y':
+                    #save library to file
+                    save_library(path, library)
+                    #display success message
+                    print("Saved.")
+            #display goodbye message
+            print("Goodbye!")
+            #break out of main loop
             break
-        #invalid choice
+        #user entered invalid choice
         else:
-            #error message
-            print("Invalid choice. Please enter a number between 1 and 7.\n")
-        
-        #wait for user before showing menu again
-        input("Press Enter to continue...")  
+            #display error message
+            print("Invalid selection, please enter 1-8.")
 
-
-#start/run/call main function
+#call main function
 main()
