@@ -333,9 +333,8 @@ def search_length(movies):
         if max_len_input:
             #convert to integer
             max_len = int(max_len_input)
-    #if conversion fails
+    # if conversion fails
     except ValueError:
-        #display error
         print("Invalid input. Please enter valid numbers.")
         #return unchanged movies list
         return movies
@@ -343,7 +342,7 @@ def search_length(movies):
     #if neither provided
     if min_len is None and max_len is None:
         #return unchanged movies list
-        return movies
+            return movies
     
     #filter by length
     results = filter_by_length(movies, min_len, max_len)
