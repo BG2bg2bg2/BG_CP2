@@ -25,7 +25,8 @@ def load_library(path):
             #loop through each row in reader starting from row 2
             for rownum, row in enumerate(reader, start=2):
                 #create item dict with lowercase keys and stripped values
-                item = {k.strip(): v.strip() for k, v in row.items() if k}
+                item = {k.strip(): (v.strip() if v else "") for k, v in row.items() if k}
+
                 #check if item has title and creator
                 if not item.get("title") or not item.get("creator"):
                     #display warning for missing required fields
@@ -114,19 +115,19 @@ def add_item(items):
     #create empty dictionary for new item
     new = {}
     #prompt for title until non-empty
-    new["title"] = input_nonempty("Title: ")
+    new["title"] = input_nonempty("Title (Name of the item you want to add): ")
     #prompt for creator until non-empty
     new["creator"] = input_nonempty("Creator (author/artist/director): ")
     #prompt for year and strip whitespace
-    new["year"] = input("Year: ").strip()
+    new["year"] = input("Year (Year it was published): ").strip()
     #prompt for genre and strip whitespace
-    new["genre"] = input("Genre: ").strip()
+    new["genre"] = input("Genre (The catagory(s) that it counts as): ").strip()
     #prompt for format and strip whitespace
-    new["format"] = input("Format: ").strip()
+    new["format"] = input("Format (Book, movie, jernal, news, videogame, exe): ").strip()
     #prompt for rating and strip whitespace
-    new["rating"] = input("Rating: ").strip()
+    new["rating"] = input("Rating (G, E, PG, E-10, PG-13, T, R, M, X, AO, NR, RP, 1-5 stars): ").strip()
     #prompt for notes and strip whitespace
-    new["notes"] = input("Notes: ").strip()
+    new["notes"] = input("Notes (Anything you want to add, ex, Do's, Don'ts, Needs, Wants ): ").strip()
     #add new item to items list
     items.append(new)
     #display confirmation message
@@ -173,7 +174,7 @@ def update_item(items):
     #check if user cancelled
     if idx is None:
         #exit function
-        return
+        return False
     #get item at chosen index
     item = items[idx]
     #display instruction to user
@@ -190,7 +191,7 @@ def update_item(items):
             item[field] = new
     #display confirmation message
     print("Item updated.")
-
+    return True
 
 def delete_item(items):
     #get index of item to delete
@@ -198,16 +199,16 @@ def delete_item(items):
     #check if user cancelled
     if idx is None:
         #exit function
-        return
+        return False
     #remove and store item at index
     removed = items.pop(idx)
     #display confirmation with removed item title
     print(f"Removed '{removed.get('title','')}'.")
-
+    return True
 
 def main():
     #set file path to personal library update csv
-    path = "individual_projects/personal_library_updates/personal_library_update.csv"
+    path = "BG_CP2\individual_projects\personal_library_updates\personal_library_update.csv"
     #load library from file
     library = load_library(path)
     #initialize changed flag as false
@@ -247,8 +248,14 @@ def main():
         #check if user chose update item
         elif choice == '4':
             #call update item function
-            update_item(library)
-            #mark library as changed
+            if update_item(library):
+                #mark library as changed
+                changed = True
+        elif choice == '5':
+            #call delete item function
+            if delete_item(library):
+                #mark library as changed
+                changed = True
         elif choice == '6':
             #save library to file
             save_library(path, library)
