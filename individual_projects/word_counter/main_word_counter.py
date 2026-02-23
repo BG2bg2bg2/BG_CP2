@@ -1,53 +1,45 @@
 #BG 1st
 
+from file_handler import add_contnt, view_file, update_word_count
+
 #funtion for main
+def main():
 #main
     #display welcome to the Document Word Counter
+    print("Welcome to the Document Word Counter")
     #loop till false
+    while True:
         #display options
         #1 to update document info (the name of the file/document)
         #2 to view document (read what is on the document)
         #3 to add content to document (write on the document)
         #4 to exit (save and quit)
+        print("1 to update document info (the name of the file/document)\n2 to view document (read what is on the document)\n3 to add content to document (write on the document)\n4 to exit (save and quit)")
         #user enter option
+        option = input("Enter the number that you want to do")
         
         #if user entered 1
+        if option == "1":
             #loop false and call update
-
+            update_work_cont(path)
         #else if user entered 2
+        elif option == "2":    
             #loop false and call view document
+            view_document(path)
 
         #else if user entered 3
+        elif option == "3":
             #loop false and call add content
-
+            add_content(path)
         #else if user entered 4
+        elif option == "4":
             #save file
+            save_library(path, library)
             #loop false as break
-
+            break
         #else
+        else:
             #display enter valid option
+            print("Please enter valid option")
             #restart loop as continue
-
-#funtion for call update
-def call_update():
-    #exact path is for only this cpu
-    #relitive path is universal meaning you can use any cpu with vscode or python language
-    #display enter the exact or reltive path
-    #user enter path
-    path = input("Enter the path that you want to use example for defalt: file_handler_word_counter.txt")
-    #try
-    try:
-        with open("path", mode = "r") as file:
-        #How do you alter text to work as data in a program?
-            for line in file:
-                print(f"Hello{line.strip()}")
-            #content = file.read()
-            #print(content)
-    except:
-        print("Can't find the file")
-        #if path not found
-            #add path
-        #else if path found
-            #use path
-    #exept
-        #display can't use that path because it won't work
+            continue
