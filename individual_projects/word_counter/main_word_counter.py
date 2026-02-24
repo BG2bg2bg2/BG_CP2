@@ -5,14 +5,14 @@ from file_handler import add_content, view_file, update_word_count, read_file
 
 def main():
     #display welcome and use an internal header that matches sample output
-    print("--- Document Word Count Updater ---")
+    print("   Document Word Count Updater    ")
     base = os.path.dirname(__file__)
     default_path = os.path.join(base, "file.txt")
     path = None
 
     while True:
         #display menu and prompt
-        print("\n--- Document Word Count Updater ---")
+        print("\n    Document Word Count Updater    ")
         print("1. Update document info\n2. View document\n3. Add content to document\n4. Exit")
         option = input("Enter your choice (1-4): ").strip()
 

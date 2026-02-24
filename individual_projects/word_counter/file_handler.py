@@ -59,6 +59,6 @@ def view_file(path):
     #Display the content of the file
     content = read_file(path)
     if content is not None:
-        print("\n--- File Content ---")
+        print("\n   File Content   ")
         print(content)
-        print("--- End of File ---")
+        print("   End of File   ")
