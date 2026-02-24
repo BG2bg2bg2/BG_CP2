@@ -21,22 +21,16 @@ def main():
         #if user entered 1
         if option == "1":
             #loop false and call update
-            update_work_cont(path)
+            update_word_count(path)
         #else if user entered 2
         elif option == "2":    
             #loop false and call view document
-            view_document(path)
+            view(path)
 
         #else if user entered 3
         elif option == "3":
             #loop false and call add content
             add_content(path)
-        #else if user entered 4
-        elif option == "4":
-            #save file
-            save_library(path, library)
-            #loop false as break
-            break
         #else
         else:
             #display enter valid option

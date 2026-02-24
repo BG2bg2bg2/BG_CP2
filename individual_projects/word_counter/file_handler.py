@@ -1,6 +1,6 @@
 # file_handler.py
 import os
-from time_handler import get_clean_time
+from time_handler_word_counter import get_clean_time
 
 def read_file(path):
     #Read file and return its content
@@ -49,3 +49,10 @@ def view_file(path):
         print("\n--- File Content ---")
         print(content)
         print("--- End of File ---")
+
+def save_library(path, library):
+    with open(path, "w", newline="", encoding="utf-8") as file:
+        #loop through each item
+        for item in path:
+            #write item row to csv file
+            path.writerow({k: item.(k, "") for k in path})
