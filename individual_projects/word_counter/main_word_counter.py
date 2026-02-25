@@ -1,39 +1,50 @@
-#BG 1st
+#BG 1st document word counter
+import os
+from file_handler import add_content, view_file, update_word_count, read_file
 
-from file_handler import add_contnt, view_file, update_word_count
 
-#funtion for main
 def main():
-#main
-    #display welcome to the Document Word Counter
-    print("Welcome to the Document Word Counter")
-    #loop till false
-    while True:
-        #display options
-        #1 to update document info (the name of the file/document)
-        #2 to view document (read what is on the document)
-        #3 to add content to document (write on the document)
-        #4 to exit (save and quit)
-        print("1 to update document info (the name of the file/document)\n2 to view document (read what is on the document)\n3 to add content to document (write on the document)\n4 to exit (save and quit)")
-        #user enter option
-        option = input("Enter the number that you want to do")
-        
-        #if user entered 1
-        if option == "1":
-            #loop false and call update
-            update_word_count(path)
-        #else if user entered 2
-        elif option == "2":    
-            #loop false and call view document
-            view(path)
+    #display welcome and use an internal header that matches sample output
+    print("   Document Word Count Updater    ")
+    base = os.path.dirname(__file__)
+    default_path = os.path.join(base, "file.txt")
+    path = None
 
-        #else if user entered 3
+    while True:
+        #display menu and prompt
+        print("\n    Document Word Count Updater    ")
+        print("1. Update document info\n2. View document\n3. Add content to document\n4. Exit")
+        option = input("Enter your choice (1-4): ").strip()
+
+        if option == "1":
+            # If no path set yet, ask for exact file path; empty input will perform update on current path
+            p = input("\nEnter the exact file path for your document (press Enter to update current file): ").strip()
+            if p:
+                path = p
+                print(f"Using file: {path}")
+            else:
+                if not path:
+                    path = default_path
+                # perform update
+                wc, ts = update_word_count(path)
+                if wc is not None:
+                    print(f"Document updated. Word count: {wc}")
+                    print("\nFILE UPDATES:\n")
+                    view_file(path)
+        elif option == "2":
+            if not path:
+                path = input("Enter the exact file path for your document: ").strip() or default_path
+            print("\nDocument content:")
+            view_file(path)
         elif option == "3":
-            #loop false and call add content
+            if not path:
+                path = input("Enter the exact file path for your document: ").strip() or default_path
             add_content(path)
-        #else
+        elif option == "4":
+            print("Exiting. Goodbye.")
+            break
         else:
-            #display enter valid option
-            print("Please enter valid option")
-            #restart loop as continue
-            continue
+            print("Please enter a valid option (1-4).")
+
+#run the main function
+main()
