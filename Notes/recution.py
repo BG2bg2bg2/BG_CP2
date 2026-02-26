@@ -1,13 +1,36 @@
 #BG 1st recursion notes
 
-#What type of code does recursion replace?
-for num in range(1,11):
-    if num % 2 == 0:
-        print(num)
-#What is a base case?
-#How do you set up a recursive function?
-#Why do we use recursion?
+    #What type of code does recursion replace?
+    #Recursion replaces iteration.
+    #Instead of using loops (for / while),
+    #recursion repeats actions by calling itself.
 
+
+#What is a base case?
+    #A base case is the stopping condition of a recursive function.
+    #It is the simplest case where the function does NOT call itself again.
+
+
+    #How do you set up a recursive function?
+        #A recursive function must have:
+            #A base case
+            #A recursive case (function calls itself with smaller input)
+
+def example(n):
+    #Base case
+    if n == 0:
+        return "Done"
+    
+    #Recursive case
+    return example(n - 1)
+
+
+# Why do we use recursion?
+    # We use recursion when:
+        #A problem can be broken into smaller versions of itself
+        #The structure is naturally recursive (like trees)
+        #Divide-and-conquer algorithms are needed
+        #It makes the code simpler and clearer
 even = []
 
 num = 3
