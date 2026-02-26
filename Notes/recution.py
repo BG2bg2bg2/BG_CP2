@@ -1,6 +1,6 @@
 #BG 1st recursion notes
 
-    #What type of code does recursion replace?
+#What type of code does recursion replace?
     #Recursion replaces iteration.
     #Instead of using loops (for / while),
     #recursion repeats actions by calling itself.
