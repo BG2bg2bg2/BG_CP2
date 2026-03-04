@@ -1,51 +1,150 @@
-#BG 1st fractal pattern generator
+import turtle
+import os
 
-#import turtle library
-import turtle as t
-#funtion for entering color
-def shape_color(color_choice):
-    colors = ["red", "blue", "green", "black"]
+
+#Draw a filled triangle
+
+def draw_triangle(points, color):
+    turtle.fillcolor(color)
+    turtle.up()
+    turtle.goto(points[0])
+    turtle.down()
+    turtle.begin_fill()
+    turtle.goto(points[1])
+    turtle.goto(points[2])
+    turtle.goto(points[0])
+    turtle.end_fill()
+
+
+
+#Recursive Sierpinski Triangle
+
+def sierpinski(points, depth, color):
+    #BASE CASE
+    if depth == 0:
+        draw_triangle(points, color)
+    else:
+        #Midpoints
+        mid1 = ((points[0][0] + points[1][0]) / 2,
+                (points[0][1] + points[1][1]) / 2)
+
+        mid2 = ((points[1][0] + points[2][0]) / 2,
+                (points[1][1] + points[2][1]) / 2)
+
+        mid3 = ((points[0][0] + points[2][0]) / 2,
+                (points[0][1] + points[2][1]) / 2)
+
+        #Recursive calls
+        sierpinski([points[0], mid1, mid3], depth - 1, color)
+        sierpinski([mid1, points[1], mid2], depth - 1, color)
+        sierpinski([mid3, mid2, points[2]], depth - 1, color)
+
+
+
+#Koch Curve (helper for snowflake)
+
+def koch_curve(length, depth):
+    if depth == 0:
+        turtle.forward(length)
+    else:
+        length /= 3
+        koch_curve(length, depth - 1)
+        turtle.left(60)
+        koch_curve(length, depth - 1)
+        turtle.right(120)
+        koch_curve(length, depth - 1)
+        turtle.left(60)
+        koch_curve(length, depth - 1)
+
+
+
+#Koch Snowflake (Extra Credit)
+
+def koch_snowflake(length, depth, color):
+    turtle.color(color)
+    turtle.begin_fill()
+    for _ in range(3):
+        koch_curve(length, depth)
+        turtle.right(120)
+    turtle.end_fill()
+
+
+
+#Save image (creates folder automatically)
+
+def save_image(screen):
+    filename = "individual_projects/fractal_save"
+
+    # Create folder if it doesn't exist
+    folder = os.path.dirname(filename)
+    if folder and not os.path.exists(folder):
+        os.makedirs(folder)
+
+    screen.getcanvas().postscript(file=filename + ".eps")
+    print(f"Image saved as {filename}.eps")
+
+
+
+#MAIN FUNCTION
+
+def main():
+    print("Welcome to the Sierpinski Triangle Generator!")
+    print("This program creates a Sierpinski Triangle fractal using recursion.\n")
+
+    screen = turtle.Screen()
+    screen.setup(width=800, height=800)
+    turtle.speed(0)
+    turtle.hideturtle()
+
+    #Choose fractal
+    print("Choose fractal type:")
+    print("1. Sierpinski Triangle")
+    print("2. Koch Snowflake")
+
     while True:
-        color_choice = input("Enter the color you want for the triange")
-        if color_choice not in colors:
-            print("Please enter a valid color")
-        else:
-            return t.color(color_choice)
-#funtion for entering the amount of triangles needed
+        choice = input("Enter choice (1 or 2): ")
+        if choice in ["1", "2"]:
+            break
+        print("Invalid choice.")
 
-
-#main function that runs the program and handles user input
-def main(color_choice, depth):
+    #Depth input
     while True:
-        print("Welcome to the fractal pattern generator")
-        user_shape_choice = input("To make a triangle with color red enter 1\nTo make a triangle with your choice of color enter 2\nTo make a triangle with your choice of depth enter 3\nTo make a triange with your choice of depth and color enter 4\nTo make shape of your choice enter 5")
-        if user_shape_choice == "1":
-            color_choice = "red"
-            depth = 100
-            return draw_shape(color_choice, depth)
-        
-        elif user_shape_choice == "2":
-            depth = 100
-            return depth, shape_color(color_choice)
-        
-        elif user_shape_choice == "3":
-            print("send you to shape funtion")
-        elif user_shape_choice == "4":
-            print("shape_choice()")
-#function to draw the Sierpinski Triangle using recursion
-def draw_shape(color_choice, depth):
-    while True:
-        t.color(color_choice)
-        for x in range(1,depth):
-            t.forward(depth)
-            t.right(120)
-        t.end_fill()
-#Use Python's turtle graphics module for drawing
-#Allow users to specify:
-#Recursion depth (1-5)
-#Triangle color
-#HINT: Remember to implement a base case in your recursive function to prevent infinite recursion!
+        try:
+            depth = int(input("\nEnter recursion depth (1-5): "))
+            if 1 <= depth <= 5:
+                break
+            print("Please enter a number between 1 and 5.")
+        except ValueError:
+            print("Invalid input. Enter a whole number.")
 
-#HINT: Use thins image to help you think about HOW to draw this with turtle!
+    #Colors
+    color = input("\nEnter triangle color (e.g., red, blue, green): ")
+    bg_color = input("Enter background color: ")
+    screen.bgcolor(bg_color)
 
-main(color_choice = t.color(), depth = t.forward(3))
+    print("\nGenerating fractal...\n")
+
+    if choice == "1":
+        size = 500
+        points = [(-size/2, -size/3),
+                  (0, size/2),
+                  (size/2, -size/3)]
+        sierpinski(points, depth, color)
+    else:
+        turtle.up()
+        turtle.goto(-250, 150)
+        turtle.down()
+        koch_snowflake(500, depth, color)
+
+    print("Fractal generated successfully!\n")
+
+    #Save option
+    save = input("Would you like to save the image? (y/n): ").lower()
+    if save == "y":
+        save_image(screen)
+
+    input("\nPress Enter to exit the program.")
+    turtle.done()
+
+
+main()
