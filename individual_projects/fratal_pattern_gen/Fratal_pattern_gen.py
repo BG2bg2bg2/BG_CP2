@@ -159,7 +159,7 @@ def shape(triangle):
     turtle.done()
 
 
-snowflake = koch_snowflake(length, depth, color)
+snowflake = koch_snowflake(koch_curve(length, depth, color))
 
 triangle = sierpinski(points, depth, color)
 
