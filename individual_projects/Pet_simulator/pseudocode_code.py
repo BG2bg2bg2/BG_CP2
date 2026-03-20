@@ -1,17 +1,25 @@
 #BG 1st Pet simulator
 
 #class for money that you make
-class Money():
-    def __init__ (self, make, have, save, m_p_h_a):
-        self.make = make
-        self.m_p_h_a = m_p_h_a
-        self.have = have
-        self.save = save
 
-    def cal(self):
-        self.m_p_h_a = input(float("Enter how much money you make anualy"))
-        self.make = self.m_p_h_a/10
-        save += input(float(f"You have earned ${self.make} how much money do you want to save?: "))
+class Money():
+    def __init__ (self, make, have, saved, m_p_h, saves):
+        self.make = make
+        self.m_p_h = m_p_h
+        self.have = have
+        self.saves = saves
+        self.saved = saved
+    
+    def have(self):
+        print(f"You make ${m_p_h} per hour, you earn ${make} and you saved ${saved}")
+saved = 0
+make = 0
+m_p_h = float(input("Enter how much money you make per hour"))
+make = m_p_h*.9
+saves = float(input(f"You have earned ${make} how much money do you want to save?: "))
+saved += saves
+saved -= make
+
 #class for food types
 class Food_types:
     def __init__(self, food_type, fcost):
@@ -47,8 +55,10 @@ class Pets_owned:
 
         #Implement methods for feeding, playing, and putting the pet to sleep
         #functin for interaction with pet
-    def pet_interacitons():
-        
+    def pet_interacitons(self):
+        pass
+
+Money()
 
 #Include a method to check and display the pet's status
 
