@@ -43,3 +43,22 @@ second = Classperiod("Computer Programing 2", room = 200)
 third = Classperiod("Computer Science Principles", room = 200)
 sixth = Classperiod("English 8", "Miss Jensen", 216)
 print(first, second, third, sixth)
+
+class Money:
+    def __init__(self, m_p_h, saved):
+        self.m_p_h = m_p_h
+        self.make = m_p_h / 10
+        self.saved = saved
+
+    def show_status(self):
+        print(f"You make ${self.m_p_h} per hour, you earn ${self.make} and you saved ${self.saved}")
+
+
+m_p_h = float(input("Enter how much money you make per hour: "))
+make = m_p_h / 10
+
+saves = float(input(f"You have earned ${make}. How much money do you want to save?: "))
+saved = saves
+
+money = Money(m_p_h, saved)
+money.show_status()
