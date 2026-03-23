@@ -3,23 +3,21 @@
 #class for money that you make
 
 class Money():
-    def __init__ (self, make, have, saved, m_p_h, saves):
-        self.make = make
+    def __init__ (self, m_p_h, saved):
         self.m_p_h = m_p_h
-        self.have = have
-        self.saves = saves
+        self.make = m_p_h*0.9
         self.saved = saved
     
     def have(self):
         print(f"You make ${m_p_h} per hour, you earn ${make} and you saved ${saved}")
-saved = 0
-make = 0
-m_p_h = float(input("Enter how much money you make per hour"))
-make = m_p_h*.9
-saves = float(input(f"You have earned ${make} how much money do you want to save?: "))
-saved += saves
-saved -= make
+m_p_h = float(input("Enter how much you make an hour: "))
+make = m_p_h*0.9
 
+saves = float(input(f"You have earned {make} how much do you want to save: "))
+saved = make - saves
+
+money = Money(m_p_h, saved)
+money.have()
 #class for food types
 class Food_types:
     def __init__(self, food_type, fcost):
@@ -58,7 +56,6 @@ class Pets_owned:
     def pet_interacitons(self):
         pass
 
-Money()
 
 #Include a method to check and display the pet's status
 
