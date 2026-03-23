@@ -97,7 +97,7 @@ class Pets_owned:
 #Develop a system where each action (feeding, playing, sleeping) affects multiple attributes
 
 
-
+#do I have all requirements met?
 #Implement a time system where each action advances time
 #User Interface:
 #Design a text-based menu for interacting with pets
