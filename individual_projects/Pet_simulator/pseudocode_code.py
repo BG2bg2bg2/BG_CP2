@@ -4,8 +4,12 @@ from class_file import *
 
 
 
-animal = ["dog", "cat", "bear", "wolf", "lizard"]
-
+animal = [
+    {"species": "dog", "food": "peas", "cost": 20},
+    {"species":"cat", "food": "ham", "cost": 10},
+    {"species": "bear", "food": "fish", "cost": 500},
+    {"wolf", "lizard"}
+        ]
 
 
 
@@ -29,44 +33,11 @@ food_type = {
     "species": f"{species}", "food type": f"{food_type}", "cost": f"{fcost}"
     }
 
-#species = age  pcost
-
-#class for pets that are availible
-class Pets_for_sale:
-    def __init__(self, species, age, pcost):
-        self.secies = species.capitalize()
-        self.age = age
-        self.pcost = pcost
-
-    #funtion for buying a pet
-    def store(self):
-        self.pcost += self.age
-        self.species += self.pcost
-    def pets(self):
-        print(f"{self.species}, age: {self.age}, cost: ${self.pcost}")
 pets = {
     "species": f"{species}", "age": f"{age}", "pcost": f"{pcost}"
 }   
 
 #Create a Pet class with attributes such as name, species, age, hunger, happiness, and energy
-
-#class for pets that you own
-class Pets_owned:
-    #function for the pets you own
-    def __init__(self, name, species, age, food_type, hunger, happiness, energy, thirst):
-        self.name = name.capitalize()
-        self.species = species.capitalize()
-        self.age = age
-        self.food_type = food_type.capitalize()
-        self.hunger = hunger
-        self.happiness = happiness
-        self.engergy = energy
-        self.thirst = thirst
-
-        #Implement methods for feeding, playing, and putting the pet to sleep
-        #functin for interaction with pet
-    def pet_interacitons(self):
-        pass
 
 
 #Include a method to check and display the pet's status
@@ -91,10 +62,21 @@ class Pets_owned:
 #Implement a simple save/load system to store pet data between sessions
 
 def save_sim():
-    pass
-    #1 to save progres and quit
-    #2 to delete progres and quit
-    #3 to save progres and continue
-    #4 to delete progres and contiue
-    #5 to continue game
-    #display opions
+    while True:
+        #1 to save progres and quit
+        print("1 to save progress and quit")
+        #2 to delete progres and quit
+        print("2 to delete progress and quit")
+        #3 to save progres and continue
+        print("3 to save progress and continue")
+        #4 to delete progres and contiue
+        print("4 to delete progress/restart")
+        #5 to continue game
+        print("5 to continue playing")
+        #display opions
+
+        choice = input("What do you want to do? ")
+        if choice == "1":
+            break
+        else:
+            continue

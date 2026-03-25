@@ -25,3 +25,36 @@ class Food_types:
     def anamal_food(self):
         #dislpaly the type of anamal will need to eat type of food that costs x amount of money
         print(f"The anamal {self.species} will need to eat {self.food} that costs ${self.fcost}")
+
+#class for pets that are availible
+class Pets_for_sale:
+    def __init__(self, species, age, pcost):
+        self.secies = species.capitalize()
+        self.age = age
+        self.pcost = pcost
+
+    #funtion for buying a pet
+    def store(self):
+        self.species = self.species
+        self.pcost += self.age + self.species + self.pcost
+    def pets(self):
+        print(f"{self.species}, age: {self.age}, cost: ${self.pcost}")
+#species = age + pcost
+
+#class for pets that you own
+class Pets_owned:
+    #function for the pets you own
+    def __init__(self, name, species, age, food_type, hunger, happiness, energy, thirst):
+        self.name = name.capitalize()
+        self.species = species.capitalize()
+        self.age = age
+        self.food_type = food_type.capitalize()
+        self.hunger = hunger
+        self.happiness = happiness
+        self.engergy = energy
+        self.thirst = thirst
+
+        #Implement methods for feeding, playing, and putting the pet to sleep
+        #functin for interaction with pet
+    def pet_interacitons(self):
+        pass
