@@ -16,7 +16,7 @@ class Money():
         #display how much you earned, made with tax, saved with what you want to save
         print(f"You make ${self.m_p_h} per hour, after tax you earn ${self.make} and you have ${self.have}, and you saved {self.saved}")
 
-
+            
 #class for the food types the anamals will need
 class Food_types:
     def __init__(self, food_type, fcost):
@@ -58,3 +58,5 @@ class Pets_owned:
         #functin for interaction with pet
     def pet_interacitons(self):
         pass
+
+#Create a Pet class with attributes such as name, species, age, hunger, happiness, and energy
