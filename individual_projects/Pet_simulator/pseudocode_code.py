@@ -37,14 +37,6 @@ while True:
 
 
 #Include a method to check and display the pet's status
-def pet_stats():
-    for pet in animal:
-    pets = {
-        "species": pet["species"],
-        "age": pet["age"],
-        "pet food cost": pet["food type cost"]
-    }
-    print(pets)
 #
 
 #Pet Interactions:

@@ -57,6 +57,10 @@ class Pets_owned:
         #Implement methods for feeding, playing, and putting the pet to sleep
         #functin for interaction with pet
     def pet_interacitons(self):
+        pet_int = input("1 to feed\n2 to play\n3 to give water\n4 to take it on a walk\n5 to change pet")
+        if pet_int == "1":
+             #display you have x food
+             print(f"You have {pfood}")
         pass
 
 #Create a Pet class with attributes such as name, species, age, hunger, happiness, and energy
