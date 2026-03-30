@@ -1,6 +1,21 @@
 def welcome():
     print("Welcome Lets make pet")
+    choose()
 
+def choose():
+    while True:
+        print(f"1 to feed {Pet[name]}\n2 to play with {Pet[name]}\n3 to make pet sleep\n4 to exit")
+        enter = input("What do you want to do")
+        if enter == "1":
+            feed()
+        elif enter == "2":
+                play()
+        elif enter == "3":
+            sleep()
+        elif enter == "4":
+            break
+        else:
+            continue
 #Class Implementation:
 
 
@@ -38,8 +53,7 @@ def store():
 #User Interface:
 #Design a text-based menu for interacting with pets
 #Allow users to create multiple pets and switch between them
-def choose():
-    print(f"1 to feed {Pet[name]}\n2 to play with {Pet[name]}")
+
 #Include options to perform various actions with the selected pet
 #Game Logic:
 #Implement a health attribute that changes based on how well the pet is cared for
@@ -48,5 +62,5 @@ def choose():
 #Data Management:
 #Implement a simple save/load system to store pet data between sessions
 
-class Save:
-    print("How do you want to save")
+#class Save:
+#   print("How do you want to save")
