@@ -1,21 +1,4 @@
-def welcome():
-    print("Welcome Lets make pet")
-    choose()
 
-def choose():
-    while True:
-        print(f"1 to feed {Pet[name]}\n2 to play with {Pet[name]}\n3 to make pet sleep\n4 to exit")
-        enter = input("What do you want to do")
-        if enter == "1":
-            feed()
-        elif enter == "2":
-                play()
-        elif enter == "3":
-            sleep()
-        elif enter == "4":
-            break
-        else:
-            continue
 #Class Implementation:
 
 
@@ -30,7 +13,7 @@ class Pet:
         self.energy = energy
 
 name = input("enter a name for your pet")
-speices = ("enter a species for your pet")
+speices = input("enter a species for your pet")
 
 def main():
     welcome()
@@ -64,3 +47,21 @@ def store():
 
 #class Save:
 #   print("How do you want to save")
+def welcome():
+    print("Welcome Lets make pet")
+    choose()
+
+def choose():
+    while True:
+        print(f"1 to feed {Pet[name]}\n2 to play with {Pet[name]}\n3 to make pet sleep\n4 to do something else")
+        enter = input("What do you want to do")
+        if enter == "1":
+            feed()
+        elif enter == "2":
+            play()
+        elif enter == "3":
+            sleep()
+        elif enter == "4":
+            main()
+        else:
+            continue
