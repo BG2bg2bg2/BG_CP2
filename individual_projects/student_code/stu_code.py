@@ -1,19 +1,43 @@
 # Class Implementation:
 class Student:
 # Create a Student class with attributes: name, student_id, and a list to store grades
-    def __init__(self, name, student_id):
-        self.name = name
-        student_id = student_id
+    def __init__(self):
+        self.name = input("Enter the name of student: ")
+        self.student_id = input(f"What is the student id for {self.name}: ")
+        self.grades = []
 
 # Implement methods to add grades, calculate average, and display student information
-    def info(self, name, student_id):
-        name = input("Enter the name of student: ")
-        student_id = input(f"What is the student id for {name}: ")
+    def show_record(self):
+        print(f"Name: {self.name}\nStudent Id: {self.student_id} ")
+        print(f"Grades: ", end = "") 
+        if not self.grades:
+            print("None yet")
+        else:
+            total = 0.0
+            count = len(self.grades)
+            for i in self.grades:
+                total += i
+            average_grade = total / count
+            print(f"{average_grade}")
 
-class child(Student):
-    def info(self):
-        name = input("Enter name of student: ")
-        student_id = input(f"What is the student id of {name}:")
+#student add grade
+    def add_grade(self):
+        while True:
+            new_student_grade = input("Enter the new grade: ")
+            try:
+                value = float(new_student_grade)
+                if 0 <= value <= 100:
+                    break
+                else:
+                    print("must be a valid input")
+            except ValueError:
+                print("Please enter a valid number")
+        self.grades.append(value)
+
+# beginning of main program
+student = Student()
+student.add_grade()
+student.show_record()
 # Create a GradeBook class to manage a collection of students
 # Include methods to add students and find students by ID or name
 # Grade Management:
