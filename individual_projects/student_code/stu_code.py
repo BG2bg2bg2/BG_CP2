@@ -1,3 +1,5 @@
+import csv
+
 # Class Implementation:
 class Student:
 # Create a Student class with attributes: name, student_id, and a list to store grades
@@ -39,6 +41,11 @@ student = Student()
 student.add_grade()
 student.show_record()
 # Create a GradeBook class to manage a collection of students
+class GradeBook:
+    with open("BG_CP2\\individual_projects\\student_code\\student.csv", "r+", newline='\n') as csvfile:
+        fieldnames = ["student", "student_id", "grades", "advrage_grade"]
+        reader = csv.reader(csvfile)
+        students = []
 # Include methods to add students and find students by ID or name
 # Grade Management:
 

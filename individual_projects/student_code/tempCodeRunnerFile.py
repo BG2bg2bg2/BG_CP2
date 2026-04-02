@@ -1,0 +1,2 @@
+
+        self.grades.append(value)
