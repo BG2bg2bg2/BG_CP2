@@ -136,8 +136,6 @@ class GradeBook:
                 print("must enter a valid number between 1-6")
                 continue
 
-grade = GradeBook()
-grade.display_menu()
 
 
 
